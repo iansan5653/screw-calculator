@@ -1,0 +1,18 @@
+.App {
+    background-color: var(--gray-1);
+    color: var(--gray-5);
+    height: 100vh;
+}
+
+.App-content {
+    max-width: 100ch;
+    padding: 0.5rem;
+    margin: auto;
+}
+
+.App-title {
+    font-weight: bold;
+    margin-top: 1em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
