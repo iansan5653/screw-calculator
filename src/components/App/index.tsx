@@ -1,5 +1,6 @@
 import FormItem from "components/FormItem";
 import Input from "components/Input";
+import Output from "components/Output";
 import { screwSpecifications } from "data/screw_specifications";
 import { ThreadSystem, threadSystems } from "data/thread_system";
 import React from "react";
@@ -9,13 +10,21 @@ export default function App(): React.ReactElement {
   const [threadSystem, setThreadSystem] = React.useState<ThreadSystem>(
     threadSystems[0]
   );
-  const [threadSize, setThreadSize] = React.useState<string | null>(null);
+  const systemThreadSizes = React.useMemo(
+    () => Object.keys(screwSpecifications[threadSystem]),
+    [threadSystem]
+  );
+  const [threadSize, setThreadSize] = React.useState<string>(
+    systemThreadSizes[0]
+  );
   const [uts, setUts] = React.useState<number | null>(null);
 
   const onMeasurementSystemChange = (value: ThreadSystem) => {
-    setThreadSize(null);
+    setThreadSize(systemThreadSizes[0]);
     setThreadSystem(value);
   };
+
+  const inputIsComplete = threadSize !== null && uts !== null;
 
   return (
     <div className="App">
@@ -38,9 +47,9 @@ export default function App(): React.ReactElement {
             label="Size"
             input={
               <Input
-                value={threadSize ?? ""}
+                value={threadSize}
                 onChange={setThreadSize}
-                options={Object.keys(screwSpecifications[threadSystem])}
+                options={systemThreadSizes}
               />
             }
           />
@@ -57,6 +66,13 @@ export default function App(): React.ReactElement {
             }
           />
         </div>
+        {inputIsComplete && (
+          <div className="App-inputs">
+            <Output label="Max Tensile Load" value="756 lb" />
+
+            <Output label="Max Shear Load" value="1200 lb" />
+          </div>
+        )}
       </div>
     </div>
   );

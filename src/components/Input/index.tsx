@@ -49,6 +49,8 @@ function SelectInput<T extends string>({
   value,
   onChange,
 }: SelectInputProps<T>): React.ReactElement {
+  if (options.length === 0) return <></>;
+
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     if (isValidOption(value, options)) onChange(value);
