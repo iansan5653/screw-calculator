@@ -1,18 +1,23 @@
 .App {
-    background-color: var(--gray-1);
-    color: var(--gray-8);
-    height: 100vh;
+  background-color: var(--gray-1);
+  color: var(--gray-8);
+  height: 100vh;
 }
 
 .App-content {
-    max-width: 100ch;
-    padding: 0.5rem;
-    margin: auto;
+  max-width: 100ch;
+  padding: 0.5rem;
+  margin: auto;
 }
 
 .App-title {
-    font-weight: bold;
-    margin-top: 1em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+  font-weight: bold;
+  margin-top: 1em;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.App-inputs {
+  display: flex;
+  gap: 1em;
 }

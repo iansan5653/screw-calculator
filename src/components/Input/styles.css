@@ -6,6 +6,10 @@
   border-radius: 0.25em;
 }
 
+.Input_SelectInput option {
+  background-color: var(--gray-1);
+}
+
 .Input:focus {
   border-color: var(--gray-7);
 }
