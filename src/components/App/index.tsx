@@ -1,6 +1,7 @@
 import FormItem from "components/FormItem";
 import Input from "components/Input";
 import Output from "components/Output";
+import calculateScrewLoads from "data/load_calculator";
 import { screwSpecifications } from "data/screw_specifications";
 import { ThreadSystem, threadSystems } from "data/thread_system";
 import React from "react";
@@ -18,13 +19,18 @@ export default function App(): React.ReactElement {
     systemThreadSizes[0]
   );
   const [uts, setUts] = React.useState<number | null>(null);
+  const [fasteners, setFasteners] = React.useState<number | null>(1);
+  const [fos, setFos] = React.useState<number | null>(3.01);
 
   const onMeasurementSystemChange = (value: ThreadSystem) => {
     setThreadSize(systemThreadSizes[0]);
     setThreadSystem(value);
   };
 
-  const inputIsComplete = threadSize !== null && uts !== null;
+  const [tensileLoad, shearLoad] =
+    uts !== null && fasteners !== null && fos !== null
+      ? calculateScrewLoads(threadSystem, threadSize, uts, fos, fasteners)
+      : [null, null];
 
   return (
     <div className="App">
@@ -54,16 +60,41 @@ export default function App(): React.ReactElement {
               onChange={setUts}
               units="psi"
               expectedDigits={6}
+              step={10000}
+              min={0}
+            />
+          </FormItem>
+
+          <FormItem label="Fasteners">
+            <Input
+              valueType="number"
+              value={fasteners}
+              onChange={setFasteners}
+              expectedDigits={4}
+              min={1}
+            />
+          </FormItem>
+
+          <FormItem label="Factor of Safety">
+            <Input
+              valueType="number"
+              value={fos}
+              onChange={setFos}
+              expectedDigits={4}
+              min={1}
+              step={0.05}
             />
           </FormItem>
         </div>
-        {inputIsComplete && (
-          <div className="App-inputs">
-            <Output label="Max Tensile Load" value="756 lb" />
+        <div className="App-inputs">
+          {tensileLoad && (
+            <Output label="Max Tensile Load" value={`${tensileLoad} lb`} />
+          )}
 
-            <Output label="Max Shear Load" value="1200 lb" />
-          </div>
-        )}
+          {shearLoad && (
+            <Output label="Max Shear Load" value={`${shearLoad} lb`} />
+          )}
+        </div>
       </div>
     </div>
   );

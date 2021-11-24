@@ -14,6 +14,9 @@ interface NumberInputProps extends InputProps<number | null> {
   valueType: "number";
   units?: string;
   expectedDigits?: number;
+  min?: number;
+  max?: number;
+  step?: number;
 }
 
 interface StringInputProps extends InputProps<string> {
@@ -39,8 +42,8 @@ const isValidOption = <T extends string>(
 /**
  * Parse integer or return null for invalid value.
  */
-const parseIntOrNull = (value: string): number | null => {
-  const parsed = parseInt(value, 10);
+const parseNumberOrNull = (value: string): number | null => {
+  const parsed = parseFloat(value);
   return Number.isNaN(parsed) ? null : parsed;
 };
 
@@ -89,17 +92,23 @@ function NumberInput({
   onChange,
   units,
   expectedDigits,
+  step,
+  min,
+  max,
 }: NumberInputProps): React.ReactElement {
   const inputProps = {
     type: "number",
     onChange: (ev: React.ChangeEvent<HTMLInputElement>) =>
-      onChange(parseIntOrNull(ev.target.value)),
+      onChange(parseNumberOrNull(ev.target.value)),
     value: value ?? "",
     style: expectedDigits
       ? {
           width: `${expectedDigits + 2}ch`,
         }
       : undefined,
+    min,
+    max,
+    step,
   };
 
   return units ? (
