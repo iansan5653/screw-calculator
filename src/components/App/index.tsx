@@ -33,38 +33,29 @@ export default function App(): React.ReactElement {
           <h1 className="App-title">Screw Calculator</h1>
         </header>
         <div className="App-inputs">
-          <FormItem
-            label="Thread System"
-            input={
-              <Input
-                value={threadSystem}
-                onChange={onMeasurementSystemChange}
-                options={threadSystems}
-              />
-            }
-          />
-          <FormItem
-            label="Size"
-            input={
-              <Input
-                value={threadSize}
-                onChange={setThreadSize}
-                options={systemThreadSizes}
-              />
-            }
-          />
-          <FormItem
-            label="Material UTS"
-            input={
-              <Input
-                valueType="number"
-                value={uts}
-                onChange={setUts}
-                units="psi"
-                expectedDigits={6}
-              />
-            }
-          />
+          <FormItem label="Thread System">
+            <Input
+              value={threadSystem}
+              onChange={onMeasurementSystemChange}
+              options={threadSystems}
+            />
+          </FormItem>
+          <FormItem label="Size">
+            <Input
+              value={threadSize}
+              onChange={setThreadSize}
+              options={systemThreadSizes}
+            />
+          </FormItem>
+          <FormItem label="Material UTS">
+            <Input
+              valueType="number"
+              value={uts}
+              onChange={setUts}
+              units="psi"
+              expectedDigits={6}
+            />
+          </FormItem>
         </div>
         {inputIsComplete && (
           <div className="App-inputs">

@@ -3,10 +3,10 @@ import "./styles.css";
 
 interface Props {
   label?: string;
-  input: React.ReactElement;
+  children: React.ReactElement;
 }
 
-export default function FormItem({ input, label }: Props): React.ReactElement {
+export default function FormItem({ children: input, label }: Props): React.ReactElement {
   return label ? (
     <label className="FormItem">
       <span className="FormItem-label">{label}</span>

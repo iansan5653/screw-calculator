@@ -1,13 +1,5 @@
-.Output {
-  margin-top: 0.5em;
-}
-
-.Output-label {
-  font-size: 0.875em;
-  display: block;
-}
-
 .Output-value {
   font-size: 2em;
   display: block;
+  line-height: 0.75em;
 }
