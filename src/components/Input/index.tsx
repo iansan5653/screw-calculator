@@ -111,13 +111,15 @@ function NumberInput({
     step,
   };
 
+  const [focused, setFocused] = React.useState(false);
+
   return units ? (
-    <span className="Input">
-      <input {...inputProps} />
+    <span className={focused ? "Input Input__focused" : "Input"}>
+      <input {...inputProps} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} />
       <span>{units}</span>
     </span>
   ) : (
-    <input {...inputProps} className="Input" />
+    <input {...inputProps} className="Input"  />
   );
 }
 

@@ -11,6 +11,7 @@
   background-color: var(--gray-1);
 }
 
-.Input:focus {
+.Input:focus,
+.Input__focused {
   border-color: var(--gray-7);
 }
