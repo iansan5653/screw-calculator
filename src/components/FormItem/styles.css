@@ -1,0 +1,9 @@
+.FormItem {
+  display: block;
+  margin-top: 0.5em;
+}
+
+.FormItem-label {
+  display: block;
+  margin-bottom: 0.25em;
+}
