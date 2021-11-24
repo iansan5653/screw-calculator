@@ -5,6 +5,7 @@ export default function calculateScrewLoads(
   threadSystem: ThreadSystem,
   threadSize: string,
   tensileStrength: number,
+  shearStrengthFactor = 0.6,
   factorOfSafety = 1,
   fastenerCount = 1
 ): [tensile: number, shear: number] {
@@ -15,9 +16,7 @@ export default function calculateScrewLoads(
     (tensileStrength * fastenerCount) / factorOfSafety;
   const tensileLoad = factoredTensileStrength * area;
 
-  // Note this is a conservative estimate - we could ask for the material type to get a more accurate estimate
-  // see https://en.wikipedia.org/wiki/Shear_strength#Comparison
-  const shearStrength = 0.6 * factoredTensileStrength;
+  const shearStrength = shearStrengthFactor * factoredTensileStrength;
   const shearLoad = shearStrength * area;
 
   return [Math.round(tensileLoad), Math.round(shearLoad)];

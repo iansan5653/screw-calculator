@@ -2,6 +2,7 @@ import FormItem from "components/FormItem";
 import Input from "components/Input";
 import Output from "components/Output";
 import calculateScrewLoads from "data/load_calculator";
+import { MaterialName, materialNames, materials } from "data/materials";
 import { screwSpecifications } from "data/screw_specifications";
 import { ThreadSystem, threadSystems } from "data/thread_system";
 import React from "react";
@@ -18,9 +19,10 @@ export default function App(): React.ReactElement {
   const [threadSize, setThreadSize] = React.useState<string>(
     systemThreadSizes[0]
   );
-  const [uts, setUts] = React.useState<number | null>(null);
+  const [material, setMaterial] = React.useState<MaterialName>("Steel");
+  const [uts, setUts] = React.useState<number | null>(170000);
   const [fasteners, setFasteners] = React.useState<number | null>(1);
-  const [fos, setFos] = React.useState<number | null>(3.01);
+  const [fos, setFos] = React.useState<number | null>(3);
 
   const onMeasurementSystemChange = (value: ThreadSystem) => {
     setThreadSize(systemThreadSizes[0]);
@@ -29,14 +31,21 @@ export default function App(): React.ReactElement {
 
   const [tensileLoad, shearLoad] =
     uts !== null && fasteners !== null && fos !== null
-      ? calculateScrewLoads(threadSystem, threadSize, uts, fos, fasteners)
+      ? calculateScrewLoads(
+          threadSystem,
+          threadSize,
+          uts,
+          materials[material].shearStrengthFactor,
+          fos,
+          fasteners
+        )
       : [null, null];
 
   return (
     <div className="App">
       <div className="App-content">
         <header>
-          <h1 className="App-title">Screw Calculator</h1>
+          <h1 className="App-title">Bolt Load Calculator</h1>
         </header>
         <div className="App-inputs">
           <FormItem label="Thread System">
@@ -53,6 +62,15 @@ export default function App(): React.ReactElement {
               options={systemThreadSizes}
             />
           </FormItem>
+
+          <FormItem label="Material">
+            <Input
+              options={materialNames}
+              value={material}
+              onChange={setMaterial}
+            />
+          </FormItem>
+
           <FormItem label="Material UTS">
             <Input
               valueType="number"
