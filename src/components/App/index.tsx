@@ -8,24 +8,38 @@ import { ThreadSystem, threadSystems } from "data/thread_system";
 import React from "react";
 import "./styles.css";
 
+interface ThreadSetting {
+  threadSystem: ThreadSystem;
+  threadSize: string;
+}
+
+const getDefaultThreadSetting = (
+  threadSystem: ThreadSystem
+): ThreadSetting => ({
+  threadSystem,
+  threadSize: Object.keys(screwSpecifications[threadSystem])[0],
+});
+
 export default function App(): React.ReactElement {
-  const [threadSystem, setThreadSystem] = React.useState<ThreadSystem>(
-    threadSystems[0]
-  );
+  const [{ threadSystem, threadSize }, setThreadSetting] =
+    React.useState<ThreadSetting>(getDefaultThreadSetting("Inch"));
+  const setThreadSystem = (value: ThreadSystem) =>
+    setThreadSetting(getDefaultThreadSetting(value));
+  const setThreadSize = (value: string) =>
+    setThreadSetting({ threadSystem, threadSize: value });
+
   const systemThreadSizes = React.useMemo(
     () => Object.keys(screwSpecifications[threadSystem]),
     [threadSystem]
   );
-  const [threadSize, setThreadSize] = React.useState<string>(
-    systemThreadSizes[0]
-  );
+
   const [material, setMaterial] = React.useState<MaterialName>("Steel");
   const [uts, setUts] = React.useState<number | null>(170000);
   const [fasteners, setFasteners] = React.useState<number | null>(1);
   const [fos, setFos] = React.useState<number | null>(3);
 
   const onMeasurementSystemChange = (value: ThreadSystem) => {
-    setThreadSize(systemThreadSizes[0]);
+    setThreadSize(Object.keys(screwSpecifications[threadSystem])[0]);
     setThreadSystem(value);
   };
 
