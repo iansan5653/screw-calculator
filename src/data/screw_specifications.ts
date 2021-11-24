@@ -1,4 +1,4 @@
-import { MeasurementSystem } from "./measurement_systems";
+import { ThreadSystem } from "./thread_system";
 
 export interface ScrewSpecification {
     minorDiameter: number;
@@ -80,7 +80,7 @@ export const inchScrewSpecifications = {
 }
 export type EnglishScrewName = keyof typeof metricScrewSpecifications;
 
-export const screwSpecifications: Readonly<Record<MeasurementSystem, Record<string, ScrewSpecification>>> = {
+export const screwSpecifications: Readonly<Record<ThreadSystem, Record<string, ScrewSpecification>>> = {
     Inch: inchScrewSpecifications,
     Metric: metricScrewSpecifications
 }

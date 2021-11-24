@@ -12,6 +12,8 @@ interface SelectInputProps<T extends string> extends InputProps<T> {
 
 interface NumberInputProps extends InputProps<number | null> {
   valueType: "number";
+  units?: string;
+  expectedDigits?: number;
 }
 
 interface StringInputProps extends InputProps<string> {
@@ -83,14 +85,28 @@ function TextInput({
 function NumberInput({
   value,
   onChange,
+  units,
+  expectedDigits,
 }: NumberInputProps): React.ReactElement {
-  return (
-    <input
-      className="Input"
-      type="number"
-      onChange={(ev) => onChange(parseIntOrNull(ev.target.value))}
-      value={value ?? ""}
-    />
+  const inputProps = {
+    type: "number",
+    onChange: (ev: React.ChangeEvent<HTMLInputElement>) =>
+      onChange(parseIntOrNull(ev.target.value)),
+    value: value ?? "",
+    style: expectedDigits
+      ? {
+          width: `${expectedDigits + 2}ch`,
+        }
+      : undefined,
+  };
+
+  return units ? (
+    <span className="Input">
+      <input {...inputProps} />
+      <span>{units}</span>
+    </span>
+  ) : (
+    <input {...inputProps} className="Input" />
   );
 }
 

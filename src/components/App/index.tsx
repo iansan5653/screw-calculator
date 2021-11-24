@@ -1,22 +1,20 @@
 import FormItem from "components/FormItem";
 import Input from "components/Input";
-import {
-  MeasurementSystem,
-  measurementSystems,
-} from "data/measurement_systems";
 import { screwSpecifications } from "data/screw_specifications";
+import { ThreadSystem, threadSystems } from "data/thread_system";
 import React from "react";
 import "./styles.css";
 
 export default function App(): React.ReactElement {
-  const [measurementSystem, setMeasurementSysem] =
-    React.useState<MeasurementSystem>(measurementSystems[0]);
+  const [threadSystem, setThreadSystem] = React.useState<ThreadSystem>(
+    threadSystems[0]
+  );
   const [threadSize, setThreadSize] = React.useState<string | null>(null);
   const [uts, setUts] = React.useState<number | null>(null);
 
-  const onMeasurementSystemChange = (value: MeasurementSystem) => {
+  const onMeasurementSystemChange = (value: ThreadSystem) => {
     setThreadSize(null);
-    setMeasurementSysem(value);
+    setThreadSystem(value);
   };
 
   return (
@@ -26,36 +24,39 @@ export default function App(): React.ReactElement {
           <h1 className="App-title">Screw Calculator</h1>
         </header>
         <div className="App-inputs">
-        <FormItem
-          label="Measurement System"
-          input={
-            <Input
-              value={measurementSystem}
-              onChange={onMeasurementSystemChange}
-              options={measurementSystems}
-            />
-          }
-        />
-        <FormItem
-          label="Thread Size"
-          input={
-            <Input
-              value={threadSize ?? ""}
-              onChange={setThreadSize}
-              options={Object.keys(screwSpecifications[measurementSystem])}
-            />
-          }
-        />
-                <FormItem
-          label="Material UTS"
-          input={
-            <Input
-              valueType="number"
-              value={uts}
-              onChange={setUts}
-            />
-          }
-        /></div>
+          <FormItem
+            label="Thread System"
+            input={
+              <Input
+                value={threadSystem}
+                onChange={onMeasurementSystemChange}
+                options={threadSystems}
+              />
+            }
+          />
+          <FormItem
+            label="Size"
+            input={
+              <Input
+                value={threadSize ?? ""}
+                onChange={setThreadSize}
+                options={Object.keys(screwSpecifications[threadSystem])}
+              />
+            }
+          />
+          <FormItem
+            label="Material UTS"
+            input={
+              <Input
+                valueType="number"
+                value={uts}
+                onChange={setUts}
+                units="psi"
+                expectedDigits={6}
+              />
+            }
+          />
+        </div>
       </div>
     </div>
   );
