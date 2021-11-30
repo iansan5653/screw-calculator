@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/screw-calculator/static/css/main.ece9a0b9.chunk.css",
-    "main.js": "/screw-calculator/static/js/main.f288ee88.chunk.js",
-    "main.js.map": "/screw-calculator/static/js/main.f288ee88.chunk.js.map",
+    "main.css": "/screw-calculator/static/css/main.9bc74063.chunk.css",
+    "main.js": "/screw-calculator/static/js/main.825c7639.chunk.js",
+    "main.js.map": "/screw-calculator/static/js/main.825c7639.chunk.js.map",
     "runtime-main.js": "/screw-calculator/static/js/runtime-main.9127d0e0.js",
     "runtime-main.js.map": "/screw-calculator/static/js/runtime-main.9127d0e0.js.map",
     "static/css/2.d89cbe95.chunk.css": "/screw-calculator/static/css/2.d89cbe95.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.b6739108.chunk.js.map": "/screw-calculator/static/js/3.b6739108.chunk.js.map",
     "index.html": "/screw-calculator/index.html",
     "static/css/2.d89cbe95.chunk.css.map": "/screw-calculator/static/css/2.d89cbe95.chunk.css.map",
-    "static/css/main.ece9a0b9.chunk.css.map": "/screw-calculator/static/css/main.ece9a0b9.chunk.css.map",
+    "static/css/main.9bc74063.chunk.css.map": "/screw-calculator/static/css/main.9bc74063.chunk.css.map",
     "static/js/2.fdce50bc.chunk.js.LICENSE.txt": "/screw-calculator/static/js/2.fdce50bc.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9127d0e0.js",
     "static/css/2.d89cbe95.chunk.css",
     "static/js/2.fdce50bc.chunk.js",
-    "static/css/main.ece9a0b9.chunk.css",
-    "static/js/main.f288ee88.chunk.js"
+    "static/css/main.9bc74063.chunk.css",
+    "static/js/main.825c7639.chunk.js"
   ]
 }
