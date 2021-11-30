@@ -20,6 +20,16 @@ const getDefaultThreadSetting = (
   threadSize: Object.keys(screwSpecifications[threadSystem])[0],
 });
 
+// Override the unit to lbf (pound-force is not a valid 'simple unit' for JS)
+const formatLbf = (lbf: number): string =>
+  new Intl.NumberFormat(undefined, {
+    style: "unit",
+    unit: "pound",
+  })
+    .formatToParts(lbf)
+    .map(({ type, value }) => (type === "unit" ? "lbf" : value))
+    .join("");
+
 export default function App(): React.ReactElement {
   const [{ threadSystem, threadSize }, setThreadSetting] =
     React.useState<ThreadSetting>(getDefaultThreadSetting("Inch"));
@@ -120,11 +130,11 @@ export default function App(): React.ReactElement {
         </div>
         <div className="App-inputs">
           {tensileLoad && (
-            <Output label="Max Tensile Load" value={`${tensileLoad} lb`} />
+            <Output label="Max Tensile Load" value={formatLbf(tensileLoad)} />
           )}
 
           {shearLoad && (
-            <Output label="Max Shear Load" value={`${shearLoad} lb`} />
+            <Output label="Max Shear Load" value={formatLbf(shearLoad)} />
           )}
         </div>
       </div>
