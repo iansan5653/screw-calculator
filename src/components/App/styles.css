@@ -6,18 +6,19 @@
 
 .App-content {
   max-width: 100ch;
-  padding: 0.5rem;
+  padding: 2rem 1rem;
   margin: auto;
 }
 
 .App-title {
   font-weight: bold;
-  margin-top: 1em;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .App-inputs {
   display: flex;
-  gap: 1em;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
 }
