@@ -1,5 +1,6 @@
 {
   "name": "screw-calculator",
+  "homepage": "https://iansan5653.github.io/screw-calculator/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
